@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academy Selection Confirmation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #D1E9F6;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 60%;
+            margin: 50px auto;
+            background-color: #D1E9F6;
+            padding: 20px;
+            border: 1px solid #ddd;
+            box-shadow: 2px 2px 12px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+        }
+        p {
+            font-size: 16px;
+            color: #555;
+            line-height: 1.6;
+        }
+        .signature {
+            margin-top: 20px;
+        }
+        .print-button-container {
+            text-align: center; /* Center the button */
+            margin-top: 20px; /* Space above the button */
+        }
+        .print-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #007BFF; /* Text color */
+            background-color: white; /* Button color */
+            border: 1px solid #007BFF; /* Border color */
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .print-button:hover {
+            background-color: #e9ecef; /* Light gray on hover */
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Academy Selection Confirmation - Action Required</h1>
+    
+    <p>Dear <b>{{ user.name }}</b>,</p> <!-- Assuming you have user_name in your context -->
+    
+    <p>We are pleased to inform you that your academy has been successfully selected. Kindly visit the academy in person and complete the necessary formalities within the next 2 days.</p>
+    
+    <p>Please make sure to bring your User ID <strong>{{ user.id }}</strong> during your visit.</p> <!-- Displaying User ID -->
+    
+    <p>If you have any questions or require further assistance, feel free to contact us.</p>
+    
+    <div class="signature">
+        <p>Best regards,<br>
+        <strong>SportSehat</strong></p>
+    </div>
+
+    <!-- Centered Print Button Container -->
+    <div class="print-button-container">
+        <button class="print-button" onclick="window.print()">Print</button>
+    </div>
+</div>
+</body>
+</html>

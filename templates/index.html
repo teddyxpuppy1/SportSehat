@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitness and Sport</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            color: #b0864f;
+            background: url('/static/images/pro.jpg') no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px 20px;
+            z-index: 1000;
+        }
+
+        .navbar h1 {
+            margin: 0;
+        }
+
+        .navbar-nav a {
+            color: #000;
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 1.1em;
+            padding: 8px 12px;
+            transition: color 0.3s;
+        }
+
+        .navbar-nav a:hover {
+            color: #000;
+            background-color: transparent;
+            border-radius: 4px;
+        }
+
+        .content {
+            text-align: center;
+            padding: 100px 20px;
+            margin-top: 100px;
+        }
+
+        .content h2 {
+            font-size: 3em;
+            margin: 0 0 20px;
+        }
+
+        .content p {
+            font-size: 1.2em;
+            margin: 0 0 30px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 1em;
+            color: #fff;
+            background: #e50914;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        .button:hover {
+            background: #f40612;
+        }
+
+        /* News Section */
+        .news-section {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 50px 0;
+        }
+
+        .news-item {
+            background-color: #b0864f;
+            border-radius: 10px;
+            width: 250px;
+            margin: 20px;
+            padding: 20px;
+            text-align: center;
+            color: white;
+        }
+
+        .news-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .news-item h3 {
+            font-size: 1.2em;
+            margin: 15px 0;
+        }
+
+        .news-item p {
+            font-size: 1em;
+        }
+
+        .news-item a {
+            color: #e50914;
+            text-decoration: none;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #141414;
+        }
+
+        footer p {
+            color: #999;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand">Fitness & Sports</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('login') }}">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('signup') }}">Signup</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Content -->
+    <div class="content">
+        <h2><b>Welcome to SportSehat</b></h2></br>
+        <p><b>Explore our range of fitness and sports activities to stay healthy and active</b></p>
+
+        <!-- News Section -->
+        <div class="news-section">
+            <div class="news-item">
+                <img src="/static/images/image1.png" alt="Neeraj Chopra">
+                <h3>Neeraj Chopra Wins Gold</h3>
+                <p>Neeraj Chopra made history by winning India's first-ever Olympic gold in athletics at the Tokyo 2020 Olympics in Javelin.</p>
+                
+            </div>
+            <div class="news-item">
+                <img src="/static/images/image2.png" alt="Mirabai Chanu">
+                <h3>Mirabai Chanu's Silver</h3>
+                <p>Mirabai Chanu secured a silver medal in weightlifting (49kg category) at the Tokyo 2020 Olympics, giving India a great start.</p>
+                
+            </div>
+            <div class="news-item">
+                <img src="/static/images/image3.png" alt="Hockey Team">
+                <h3>Indian Hockey Team Wins Bronze</h3>
+                <p>After a 41-year wait, the Indian men's hockey team clinched a bronze medal at the Tokyo 2020 Olympics, marking a historic moment.</p>
+                
+            </div>
+            <div class="news-item">
+                <img src="/static/images/image4.png" alt="PV Sindhu">
+                <h3>PV Sindhu Clinches Bronze</h3>
+                <p>PV Sindhu became the first Indian woman to win two individual Olympic medals after securing bronze at Tokyo 2020 in badminton.</p>
+                
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>© Team Anonymous</p>
+    </footer>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

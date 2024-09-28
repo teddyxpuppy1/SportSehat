@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stress Management and Coloring App</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            padding: 20px;
+            background-color: #D1E9F6;
+        }
+        .technique, .coloring-app {
+            display: none; /* Hide all sections initially */
+        }
+        .technique.active, .coloring-app.active {
+            display: block; /* Show only the active section */
+        }
+        .technique h3, .coloring-app h1 {
+            color: #343a40;
+        }
+        .technique p, .coloring-app p {
+            color: #6c757d;
+        }
+        .video-link {
+            display: inline-block;
+            margin-top: 10px;
+            color: #007bff;
+        }
+        .color-palette {
+            display: flex;
+            justify-content: center; /* Center items horizontally */
+            flex-wrap: wrap; /* Wrap items if there are too many to fit in one line */
+            margin-top: 20px;
+        }
+        .color-palette div {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid #ddd;
+            transition: border 0.2s ease;
+            margin: 5px; /* Add some space between color options */
+        }
+        .color-palette div:hover {
+            border-color: #666;
+        }
+        .canvas-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        svg {
+            width: 300px;
+            height: 300px;
+            border: 2px solid #ccc;
+        }
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .btn-sound {
+            margin-left: 10px;
+        }
+        .technique iframe {
+    display: block;
+    margin: 0 auto; /* Center the video horizontally */
+    max-width: 100%; /* Ensure it is responsive */
+}
+
+    </style>
+    
+</head>
+<body>
+
+    <div class="container">
+        <h1 class="text-center mb-4">Stress Management</h1>
+
+        <div class="btn-container text-center mb-4">
+            <button class="btn btn-primary" onclick="showSection('mentalFitness')">Mental Fitness</button>
+            <button class="btn btn-secondary" onclick="showSection('stressRelief')">Fun Activity</button>
+        </div>
+
+        <!-- Mental Fitness Section -->
+        <div class="technique" id="mentalFitness">
+            <div>
+                <h3>Meditation</h3>
+                <p>Meditation helps calm your mind and reduce stress. It involves focusing on your breath and clearing your mind of distractions.</p>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/JslvBcIVtDg?si=DcVx26EFtxiK7rYW" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                <div>
+                <h3>Deep Breathing</h3>
+                <p>Deep breathing exercises can help lower your stress levels by promoting relaxation and reducing anxiety.</p>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/IAMpA8_JbKk?si=3eulIdFXC3HnzK1_" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+            <div>
+                <h3>Yoga</h3>
+                <p>Yoga combines physical postures, breathing exercises, and meditation to improve overall well-being and reduce stress.</p>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/9PN8fcZM0AQ?si=mMsVWZyAU54qAsWN" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+            </div>
+            <div>
+                <h3>Progressive Muscle Relaxation</h3>
+                <p>This technique involves tensing and then relaxing different muscle groups to help release physical tension and stress.</p>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/BpCioRUvpRk?si=K1XEQQEWiC_6NGTG" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+        </div>
+
+        <!-- Stress Relief Section -->
+        <div class="coloring-app" id="stressRelief">
+            <h1 style="text-align: center;">Color to Relax</h1>
+            <p style="text-align: center;">Select a color and click on an image part to color it.</p>
+
+            <!-- Color Palette Section -->
+            <div class="color-palette">
+                <div style="background-color: red;"></div>
+                <div style="background-color: blue;"></div>
+                <div style="background-color: green;"></div>
+                <div style="background-color: yellow;"></div>
+                <div style="background-color: orange;"></div>
+                <div style="background-color: purple;"></div>
+                <div style="background-color: black;"></div>
+            </div>
+
+            <!-- Canvas Section for Random Shapes -->
+            <div class="canvas-container">
+                <svg id="svgCanvas" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300">
+                    <!-- Random Shapes will be generated here -->
+                </svg>
+            </div>
+
+            <!-- Buttons Section -->
+            <div class="btn-group">
+                <button class="btn btn-primary" id="generateImage">Generate Random Image</button>
+                <button class="btn btn-secondary btn-sound" id="toggleSound">Play Relaxing Music</button>
+            </div>
+
+            <!-- Background Stress-Relief Music -->
+            <audio id="bgMusic" loop>
+                <source src="https://www.bensound.com/bensound-music/bensound-slowmotion.mp3" type="audio/mp3">
+            </audio>
+        </div>
+    </div>
+
+    <script>
+        let selectedColor = 'black'; // Default color
+        let soundOn = false; // Background music state
+        const colorPalette = document.querySelectorAll('.color-palette div');
+        const svgCanvas = document.getElementById('svgCanvas');
+        const bgMusic = document.getElementById('bgMusic');
+        const toggleSoundButton = document.getElementById('toggleSound');
+
+        // Show the corresponding section based on button click
+        function showSection(sectionId) {
+            const mentalFitnessSection = document.getElementById('mentalFitness');
+            const stressReliefSection = document.getElementById('stressRelief');
+
+            // Hide both sections
+            mentalFitnessSection.classList.remove('active');
+            stressReliefSection.classList.remove('active');
+
+            // Show the selected section
+            if (sectionId === 'mentalFitness') {
+                mentalFitnessSection.classList.add('active');
+            } else if (sectionId === 'stressRelief') {
+                stressReliefSection.classList.add('active');
+            }
+        }
+
+        // Color Palette Selection
+        colorPalette.forEach(palette => {
+            palette.addEventListener('click', (e) => {
+                selectedColor = e.target.style.backgroundColor; // Use background color directly
+                playClickSound();
+            });
+        });
+
+        // Function to generate a random shape
+        function getRandomShape() {
+            const shapes = ['rect', 'circle', 'ellipse', 'polygon']; // Define possible shapes
+            return shapes[Math.floor(Math.random() * shapes.length)];
+        }
+
+        // Function to create random shapes in the SVG
+        function generateRandomImage() {
+            svgCanvas.innerHTML = ''; // Clear previous shapes
+            const shapeCount = Math.floor(Math.random() * 5) + 3; // Generate 3 to 8 shapes
+            for (let i = 0; i < shapeCount; i++) {
+                const shapeType = getRandomShape();
+                let newShape;
+
+                if (shapeType === 'rect') {
+                    newShape = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+                    newShape.setAttribute('x', Math.random() * 200);
+                    newShape.setAttribute('y', Math.random() * 200);
+                    newShape.setAttribute('width', 50 + Math.random() * 50);
+                    newShape.setAttribute('height', 50 + Math.random() * 50);
+                } else if (shapeType === 'circle') {
+                    newShape = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                    newShape.setAttribute('cx', 50 + Math.random() * 200);
+                    newShape.setAttribute('cy', 50 + Math.random() * 200);
+                    newShape.setAttribute('r', 30 + Math.random() * 20);
+                } else if (shapeType === 'ellipse') {
+                    newShape = document.createElementNS('http://www.w3.org/2000/svg', 'ellipse');
+                    newShape.setAttribute('cx', 50 + Math.random() * 200);
+                    newShape.setAttribute('cy', 50 + Math.random() * 200);
+                    newShape.setAttribute('rx', 30 + Math.random() * 30);
+                    newShape.setAttribute('ry', 20 + Math.random() * 30);
+                } else if (shapeType === 'polygon') {
+                    newShape = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+                    const points = [];
+                    for (let j = 0; j < 5; j++) {
+                        const x = Math.random() * 300;
+                        const y = Math.random() * 300;
+                        points.push(`${x},${y}`);
+                    }
+                    newShape.setAttribute('points', points.join(' '));
+                }
+
+                newShape.setAttribute('fill', '#fff');
+                newShape.setAttribute('stroke', '#000');
+                newShape.setAttribute('stroke-width', '2');
+                newShape.style.transition = 'fill 0.3s ease'; // Smooth transition when filling shapes
+                newShape.addEventListener('click', (e) => {
+                    e.target.setAttribute('fill', selectedColor); // Change color on click
+                    playClickSound();
+                });
+
+                svgCanvas.appendChild(newShape);
+            }
+        }
+
+        // Initial image generation
+        generateRandomImage();
+
+        // Button to generate a random image
+        document.getElementById('generateImage').addEventListener('click', generateRandomImage);
+
+        // Toggle background music
+        toggleSoundButton.addEventListener('click', () => {
+            if (soundOn) {
+                bgMusic.pause();
+                toggleSoundButton.textContent = "Play Relaxing Music"; // Use textContent
+            } else {
+                bgMusic.play();
+                toggleSoundButton.textContent = "Pause Music"; // Use textContent
+            }
+            soundOn = !soundOn;
+        });
+
+        // Play click sound effect
+        function playClickSound() {
+            const clickSound = new Audio('https://www.soundjay.com/button/sounds/button-3.mp3');
+            clickSound.play();
+        }
+
+    </script>
+</body>
+</html>

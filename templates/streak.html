@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workout Streak</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .streak-display {
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .btn-custom {
+            background-color: #28a745;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">Track Your Workout Streak</h1>
+
+        <div class="streak-display">
+            Current Streak: <span id="currentStreak">0</span> day(s)
+        </div>
+
+        <form id="workoutForm" class="mb-4">
+            <div class="form-group">
+                <label for="exerciseType">Exercise Type</label>
+                <input type="text" class="form-control" id="exerciseType" placeholder="Enter exercise type" required>
+            </div>
+            <div class="form-group">
+                <label for="duration">Duration (in minutes)</label>
+                <input type="number" class="form-control" id="duration" placeholder="Enter duration" required>
+            </div>
+            <div class="form-group">
+                <label for="intensity">Intensity</label>
+                <select class="form-control" id="intensity" required>
+                    <option value="">Select intensity</option>
+                    <option value="low">Low</option>
+                    <option value="moderate">Moderate</option>
+                    <option value="high">High</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-custom">Log Workout</button>
+        </form>
+
+        <h2>Workout Summary</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Exercise Type</th>
+                    <th>Duration (min)</th>
+                    <th>Intensity</th>
+                </tr>
+            </thead>
+            <tbody id="workoutSummary"></tbody>
+        </table>
+    </div>
+
+    <script>
+        const workoutForm = document.getElementById('workoutForm');
+        const workoutSummary = document.getElementById('workoutSummary');
+        const currentStreakElement = document.getElementById('currentStreak');
+
+        // Initialize streak from localStorage
+        let currentStreak = parseInt(localStorage.getItem('streak')) || 0;
+        currentStreakElement.textContent = currentStreak;
+
+        // Load workouts from localStorage on page load
+        window.onload = function() {
+            loadWorkouts();
+        };
+
+        workoutForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const exerciseType = document.getElementById('exerciseType').value;
+            const duration = document.getElementById('duration').value;
+            const intensity = document.getElementById('intensity').value;
+
+            // Create a workout object with date
+            const workout = {
+                exerciseType: exerciseType,
+                duration: duration,
+                intensity: intensity,
+                date: new Date().toLocaleDateString() // Save the date of the workout
+            };
+
+            // Save workout to localStorage
+            saveWorkout(workout);
+            addWorkoutToTable(workout);
+
+            // Increment streak
+            updateStreak();
+
+            // Reset form fields
+            workoutForm.reset();
+        });
+
+        function saveWorkout(workout) {
+            // Get existing workouts from localStorage
+            let workouts = JSON.parse(localStorage.getItem('workouts')) || [];
+            workouts.push(workout);
+            localStorage.setItem('workouts', JSON.stringify(workouts));
+        }
+
+        function loadWorkouts() {
+            // Get workouts from localStorage
+            const workouts = JSON.parse(localStorage.getItem('workouts')) || [];
+            workouts.forEach(addWorkoutToTable);
+        }
+
+        function addWorkoutToTable(workout) {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${workout.date}</td>
+                <td>${workout.exerciseType}</td>
+                <td>${workout.duration}</td>
+                <td>${workout.intensity}</td>
+            `;
+            workoutSummary.appendChild(row);
+        }
+
+        function updateStreak() {
+            let lastWorkoutDate = localStorage.getItem('lastWorkoutDate');
+            const today = new Date().toLocaleDateString();
+
+            // If workout is logged for a new day, increment streak
+            if (lastWorkoutDate !== today) {
+                currentStreak++;
+                localStorage.setItem('streak', currentStreak);
+                localStorage.setItem('lastWorkoutDate', today);
+            }
+
+            currentStreakElement.textContent = currentStreak;
+        }
+    </script>
+</body>
+</html>

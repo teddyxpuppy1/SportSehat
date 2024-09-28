@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitness and Exercise Planner</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #D1E9F6;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            padding: 20px;
+            background-color: #D1E9F6;
+        }
+
+        .container {
+            max-width: 650px;
+            background-color: #D1E9F6;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease-in-out;
+        }
+
+        .container:hover {
+            box-shadow: 0px 12px 50px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 25px;
+            color: #2C3E50;
+            letter-spacing: 1.2px;
+            font-weight: 600;
+        }
+
+        h4 {
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            color: #34495E;
+            font-weight: 500;
+        }
+
+        .primary-button, .secondary-button {
+            border: none;
+            padding: 12px 18px;
+            margin: 12px 0;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            width: 100%;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .primary-button {
+            background-color: #0056b3;
+            color: #ffffff;
+        }
+
+        .secondary-button {
+          background-color: #0056b3;  
+            color: #ffffff;
+        }
+
+        .primary-button:hover, .secondary-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .plan-section h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #34495E;
+            font-weight: 600;
+        }
+
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        ul li::before {
+            content: "•";
+            color: #3498db;
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+        }
+
+        ul li {
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 25px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            h4 {
+                font-size: 1.2rem;
+            }
+
+            .primary-button, .secondary-button {
+                font-size: 1rem;
+            }
+        }
+      .plan-section {
+    margin-bottom: 30px;
+}
+
+
+
+
+
+
+
+
+
+
+
+    </style>
+</head>
+
+<body>
+
+    <div class="container text-center">
+        <h1>Fitness & Exercise Planner</h1>
+
+        <!-- Current Body Type Selection -->
+        <div id="currentBodyType" class="selection-container">
+            <h4>Select Your Current Body Type</h4>
+            <div class="row justify-content-center">
+                <div class="col-6">
+                    <button class="secondary-button" onclick="selectCurrentBodyType('skinny')">Skinny</button>
+                </div>
+                <div class="col-6">
+                    <button class="secondary-button" onclick="selectCurrentBodyType('plump')">Plump</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Desired Body Type Selection -->
+        <div id="desiredBodyType" class="selection-container hidden">
+            <h4>Select Your Desired Body Type</h4>
+            <div id="desiredOptions" class="row justify-content-center">
+                <!-- Buttons will be generated dynamically -->
+            </div>
+        </div>
+
+        <!-- Recommendations Display -->
+        <div id="recommendations" class="recommendations-container hidden">
+          
+            <h4>Personalized Plan</h4>
+            <div id="planDetails"></div>
+            <div class="text-center mt-4">
+                <button class="primary-button" onclick="restartProcess()">Return Home</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.8/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.min.js"></script>
+
+    <script>
+        const plans = {
+            skinny: {
+                plump: {
+                    diet: [
+                        "Increase calorie intake by 500-700 calories daily, focusing on nutrient-dense foods.",
+                        "Include healthy fats such as avocados, nuts, and olive oil in your meals.",
+                        "Prioritize protein sources like chicken, fish, beans, and Greek yogurt.",
+                        "Add whole grains like quinoa, brown rice, and whole wheat pasta to your diet.",
+                        "Snack frequently on high-calorie, nutrient-rich foods like trail mix or smoothies."
+                    ],
+                    exercises: [
+                        { name: "Squats", sets: 4, reps: 10 },
+                        { name: "Deadlifts", sets: 4, reps: 8 },
+                        { name: "Bench Press", sets: 4, reps: 8 },
+                        { name: "Pull-Ups", sets: 3, reps: 6 },
+                        { name: "Lunges", sets: 3, reps: 12 }
+                    ]
+                },
+                fit: {
+                    diet: [
+                        "Maintain a balanced intake of macronutrients: proteins, carbs, and healthy fats.",
+                        "Focus on lean proteins such as chicken breast, turkey, fish, and legumes.",
+                        "Incorporate plenty of fruits and vegetables for essential vitamins and minerals.",
+                        "Stay hydrated with 8-10 glasses of water per day.",
+                        "Limit processed foods and added sugars."
+                    ],
+                    exercises: [
+                        { name: "Jogging", sets: 1, reps: "30-45 minutes" },
+                        { name: "Push-Ups", sets: 3, reps: 15 },
+                        { name: "Plank", sets: 3, reps: "60 seconds" },
+                        { name: "Bicycle Crunches", sets: 3, reps: 20 },
+                        { name: "Dumbbell Rows", sets: 3, reps: 10 }
+                    ]
+                },
+                athletic: {
+                    diet: [
+                        "Consume a nutrient-dense diet rich in proteins and complex carbohydrates.",
+                        "Incorporate antioxidant-rich foods like berries and leafy greens.",
+                        "Stay hydrated with electrolyte drinks before and after workouts.",
+                        "Include snacks such as protein bars or shakes post-exercise.",
+                        "Focus on whole foods and limit refined sugars."
+                    ],
+                    exercises: [
+                        { name: "Sprints", sets: 6, reps: "100 meters" },
+                        { name: "Plyometric Jumps", sets: 4, reps: 10 },
+                        { name: "Agility Ladder Drills", sets: 5, reps: "30 seconds" },
+                        { name: "Kettlebell Swings", sets: 3, reps: 12 },
+                        { name: "Burpees", sets: 3, reps: 10 }
+                    ]
+                }
+            },
+            plump: {
+                skinny: {
+                    diet: [
+                        "Create a calorie deficit of 500 calories daily through controlled portion sizes.",
+                        "Incorporate high-fiber foods like vegetables, fruits, and whole grains.",
+                        "Consume lean proteins such as chicken breast, fish, and legumes to preserve muscle.",
+                        "Avoid sugary drinks and snacks to reduce unnecessary calories.",
+                        "Focus on meal prepping to avoid unhealthy choices."
+                    ],
+                    exercises: [
+                        { name: "Brisk Walking", sets: 1, reps: "45-60 minutes" },
+                        { name: "Cycling", sets: 1, reps: "30-45 minutes" },
+                        { name: "Bodyweight Squats", sets: 3, reps: 15 },
+                        { name: "Lateral Raises", sets: 3, reps: 12 },
+                        { name: "Plank", sets: 3, reps: "30 seconds" }
+                    ]
+                },
+                fit: {
+                    diet: [
+                        "Eat balanced meals with appropriate portion sizes.",
+                        "Incorporate lean proteins, healthy fats, and plenty of fruits and vegetables.",
+                        "Stay hydrated and limit the intake of processed foods.",
+                        "Plan meals in advance to avoid impulsive eating."
+                    ],
+                    exercises: [
+                        { name: "Jogging", sets: 1, reps: "30-45 minutes" },
+                        { name: "Resistance Training", sets: 3, reps: 12 },
+                        { name: "Yoga", sets: 1, reps: "30 minutes" },
+                        { name: "Jump Rope", sets: 3, reps: "5 minutes" }
+                    ]
+                },
+                athletic: {
+                    diet: [
+                        "Focus on complex carbohydrates for energy and omega-3 fatty acids for joint health.",
+                        "Stay hydrated and consume plenty of high-fiber foods.",
+                        "Incorporate lean proteins in each meal for muscle recovery.",
+                        "Monitor portion sizes and consider using smaller plates."
+                    ],
+                    exercises: [
+                        { name: "HIIT (High-Intensity Interval Training)", sets: 1, reps: "20-30 minutes" },
+                        { name: "Battle Ropes", sets: 3, reps: "30 seconds" },
+                        { name: "Box Jumps", sets: 3, reps: 10 },
+                        { name: "Swimming", sets: 1, reps: "30 minutes" }
+                    ]
+                }
+            }
+        };
+
+        let currentBodyType = "";
+        let desiredBodyType = "";
+
+        function selectCurrentBodyType(type) {
+            currentBodyType = type;
+            document.getElementById('currentBodyType').classList.add('hidden');
+            document.getElementById('desiredBodyType').classList.remove('hidden');
+            populateDesiredOptions();
+        }
+
+        function populateDesiredOptions() {
+            const desiredOptionsContainer = document.getElementById('desiredOptions');
+            desiredOptionsContainer.innerHTML = '';
+
+            const options = currentBodyType === 'skinny' ? ['plump', 'fit', 'athletic'] : ['skinny', 'fit', 'athletic'];
+
+            options.forEach(option => {
+                const button = document.createElement('button');
+                button.textContent = option.charAt(0).toUpperCase() + option.slice(1);
+                button.classList.add('secondary-button');
+                button.addEventListener('click', () => selectDesiredBodyType(option));
+                desiredOptionsContainer.appendChild(button);
+            });
+        }
+
+        function selectDesiredBodyType(type) {
+            desiredBodyType = type;
+            document.getElementById('desiredBodyType').classList.add('hidden');
+            document.getElementById('recommendations').classList.remove('hidden');
+            displayPlan();
+        }
+
+        function displayPlan() {
+            const planDetails = document.getElementById('planDetails');
+            planDetails.innerHTML = '';
+
+            const plan = plans[currentBodyType][desiredBodyType];
+
+            const dietSection = document.createElement('div');
+            dietSection.classList.add('plan-section');
+            const dietTitle = document.createElement('h3');
+            dietTitle.textContent = 'Diet Plan';
+            const dietList = document.createElement('ul');
+            plan.diet.forEach(item => {
+                const listItem = document.createElement('li');
+                listItem.textContent = item;
+                dietList.appendChild(listItem);
+            });
+            dietSection.appendChild(dietTitle);
+            dietSection.appendChild(dietList);
+
+            const exerciseSection = document.createElement('div');
+            exerciseSection.classList.add('plan-section');
+            const exerciseTitle = document.createElement('h3');
+            exerciseTitle.textContent = 'Exercise Plan';
+            const exerciseList = document.createElement('ul');
+            plan.exercises.forEach(exercise => {
+                const listItem = document.createElement('li');
+                listItem.textContent = `${exercise.name}: ${exercise.sets} sets of ${exercise.reps} reps`;
+                exerciseList.appendChild(listItem);
+            });
+            exerciseSection.appendChild(exerciseTitle);
+            exerciseSection.appendChild(exerciseList);
+
+            planDetails.appendChild(dietSection);
+            planDetails.appendChild(exerciseSection);
+        }
+
+        function restartProcess() {
+            currentBodyType = "";
+            desiredBodyType = "";
+            document.getElementById('recommendations').classList.add('hidden');
+            document.getElementById('currentBodyType').classList.remove('hidden');
+        }
+    </script>
+</body>
+
+</html>

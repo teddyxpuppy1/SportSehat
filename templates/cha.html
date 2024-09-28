@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>30-Day Diet and Exercise Plan with Rewards</title>
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #D1E9F6;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 700px;
+            margin-top: 100px;
+            margin-bottom: 100px;
+            background-color: #FFF;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+        }
+        h1, h2 {
+            color: #2E8B57;
+        }
+        h2 {
+            margin-top: 20px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        ul li {
+            margin-bottom: 10px;
+        }
+        .section {
+            margin-bottom: 30px;
+        }
+        .reward {
+            color: #ff9800;
+            font-weight: bold;
+        }
+        .btn-complete {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .btn-complete:disabled {
+            background-color: #ccc;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1 class="text-center my-4"><b>30-Day Challenge</b></h1>
+
+        <!-- Reward Display -->
+        <h2 class="text-center reward">Current Reward Points: <span id="rewardPoints">0</span></h2>
+
+        <!-- Day 1-5 Plan -->
+        <div class="section">
+            <h2><b>Day 1-5</b></h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <h3><b>Diet:</b></h3>
+                    <ul>
+                        <li><strong>Breakfast:</strong> Whole wheat toast with avocado and eggs</li>
+                        <li><strong>Lunch:</strong> Grilled chicken with quinoa and mixed vegetables</li>
+                        <li><strong>Snack:</strong> Greek yogurt with berries</li>
+                        <li><strong>Dinner:</strong> Baked salmon with sweet potato and green beans</li>
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <h3><b>Exercise:</b></h3>
+                    <ul>
+                        <li><strong>Warm-up:</strong> 5-minute cardio</li>
+                        <li><strong>Strength training:</strong> Squats, lunges, push-ups, and planks (3 sets of 10 reps each)</li>
+                        <li><strong>Cardio:</strong> 20-minute jogging or cycling</li>
+                        <li><strong>Cool-down:</strong> 5-minute stretching</li>
+                    </ul>
+                </div>
+            </div>
+            <button class="btn-complete" id="completeBtn1">Complete Day 1-5</button>
+        </div>
+
+        <!-- Day 6-10 Plan -->
+        <div class="section">
+            <h2><b>Day 6-10</b></h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <h3><b>Diet:</b></h3>
+                    <ul>
+                        <li><strong>Breakfast:</strong> Oatmeal with banana and honey</li>
+                        <li><strong>Lunch:</strong> Grilled turkey with brown rice and mixed vegetables</li>
+                        <li><strong>Snack:</strong> Apple slices with almond butter</li>
+                        <li><strong>Dinner:</strong> Grilled chicken with roasted vegetables and quinoa</li>
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <h3><b>Exercise:</b></h3>
+                    <ul>
+                        <li><strong>Warm-up:</strong> 5-minute cardio</li>
+                        <li><strong>Strength training:</strong> Deadlifts, bench press, and rows (3 sets of 10 reps each)</li>
+                        <li><strong>Cardio:</strong> 20-minute swimming or cycling</li>
+                        <li><strong>Cool-down:</strong> 5-minute stretching</li>
+                    </ul>
+                </div>
+            </div>
+            <button class="btn-complete" id="completeBtn2" disabled>Complete Day 6-10</button>
+        </div>
+
+        <!-- Continue for other days (Day 11-15, Day 16-20, Day 21-25, Day 26-30) -->
+<!-- Day 11-15 Plan -->
+<div class="section">
+    <h2><b>Day 11-15</b></h2>
+    <div class="row">
+        <div class="col-md-6">
+            <h3><b>Diet:</b></h3>
+            <ul>
+                <li><strong>Breakfast:</strong> Smoothie with spinach, banana, and protein powder</li>
+                <li><strong>Lunch:</strong> Grilled fish with brown rice and steamed broccoli</li>
+                <li><strong>Snack:</strong> Mixed nuts and seeds</li>
+                <li><strong>Dinner:</strong> Turkey meatballs with zucchini noodles</li>
+            </ul>
+        </div>
+        <div class="col-md-6">
+            <h3><b>Exercise:</b></h3>
+            <ul>
+                <li><strong>Warm-up:</strong> 5-minute cardio</li>
+                <li><strong>Strength training:</strong> Lunges, pull-ups, and dips (3 sets of 12 reps each)</li>
+                <li><strong>Cardio:</strong> 25-minute cycling or brisk walking</li>
+                <li><strong>Cool-down:</strong> 5-minute stretching</li>
+            </ul>
+        </div>
+    </div>
+    <button class="btn-complete" id="completeBtn3" disabled>Complete Day 11-15</button>
+</div>
+
+<!-- Day 16-20 Plan -->
+<div class="section">
+    <h2><b>Day 16-20</b></h2>
+    <div class="row">
+        <div class="col-md-6">
+            <h3><b>Diet:</b></h3>
+            <ul>
+                <li><strong>Breakfast:</strong> Greek yogurt with granola and mixed berries</li>
+                <li><strong>Lunch:</strong> Chicken salad with avocado and vinaigrette dressing</li>
+                <li><strong>Snack:</strong> Carrot sticks with hummus</li>
+                <li><strong>Dinner:</strong> Grilled shrimp with couscous and sautéed spinach</li>
+            </ul>
+        </div>
+        <div class="col-md-6">
+            <h3><b>Exercise:</b></h3>
+            <ul>
+                <li><strong>Warm-up:</strong> 5-minute cardio</li>
+                <li><strong>Strength training:</strong> Leg press, bicep curls, tricep extensions (3 sets of 12 reps)</li>
+                <li><strong>Cardio:</strong> 25-minute high-intensity interval training (HIIT)</li>
+                <li><strong>Cool-down:</strong> 5-minute stretching</li>
+            </ul>
+        </div>
+    </div>
+    <button class="btn-complete" id="completeBtn4" disabled>Complete Day 16-20</button>
+</div>
+
+<!-- Day 21-25 Plan -->
+<div class="section">
+    <h2><b>Day 21-25</b></h2>
+    <div class="row">
+        <div class="col-md-6">
+            <h3><b>Diet:</b></h3>
+            <ul>
+                <li><strong>Breakfast:</strong> Scrambled eggs with spinach and whole wheat toast</li>
+                <li><strong>Lunch:</strong> Quinoa salad with grilled chicken and vegetables</li>
+                <li><strong>Snack:</strong> Protein bar or smoothie</li>
+                <li><strong>Dinner:</strong> Grilled steak with roasted potatoes and asparagus</li>
+            </ul>
+        </div>
+        <div class="col-md-6">
+            <h3><b>Exercise:</b></h3>
+            <ul>
+                <li><strong>Warm-up:</strong> 5-minute cardio</li>
+                <li><strong>Strength training:</strong> Overhead press, squats, deadlifts (3 sets of 12 reps)</li>
+                <li><strong>Cardio:</strong> 30-minute swimming or running</li>
+                <li><strong>Cool-down:</strong> 5-minute stretching</li>
+            </ul>
+        </div>
+    </div>
+    <button class="btn-complete" id="completeBtn5" disabled>Complete Day 21-25</button>
+</div>
+
+<!-- Day 26-30 Plan -->
+<div class="section">
+    <h2><b>Day 26-30</b></h2>
+    <div class="row">
+        <div class="col-md-6">
+            <h3><b>Diet:</b></h3>
+            <ul>
+                <li><strong>Breakfast:</strong> Oatmeal with almond milk, chia seeds, and fresh fruit</li>
+                <li><strong>Lunch:</strong> Grilled chicken wrap with avocado and spinach</li>
+                <li><strong>Snack:</strong> Mixed veggies with guacamole</li>
+                <li><strong>Dinner:</strong> Grilled tofu with quinoa and roasted vegetables</li>
+            </ul>
+        </div>
+        <div class="col-md-6">
+            <h3><b>Exercise:</b></h3>
+            <ul>
+                <li><strong>Warm-up:</strong> 5-minute cardio</li>
+                <li><strong>Strength training:</strong> Leg curls, lat pulldowns, chest press (3 sets of 15 reps)</li>
+                <li><strong>Cardio:</strong> 30-minute cycling or jogging</li>
+                <li><strong>Cool-down:</strong> 5-minute stretching</li>
+            </ul>
+        </div>
+    </div>
+    <button class="btn-complete" id="completeBtn6" disabled>Complete Day 26-30</button>
+</div>
+
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        // Function to get rewards from localStorage or initialize
+        function getRewardPoints() {
+            return parseInt(localStorage.getItem('rewardPoints')) || 0;
+        }
+
+        // Function to set reward points in localStorage and update UI
+        function setRewardPoints(points) {
+            localStorage.setItem('rewardPoints', points);
+            document.getElementById('rewardPoints').textContent = points;
+        }
+
+        // Function to get button states from localStorage or initialize
+        function getButtonState(buttonId) {
+            return localStorage.getItem(buttonId) === 'true'; // Return true if stored as 'true'
+        }
+
+        // Function to set button states in localStorage
+        function setButtonState(buttonId, state) {
+            localStorage.setItem(buttonId, state);
+            document.getElementById(buttonId).disabled = state; // Disable or enable button based on state
+        }
+
+        // Initial reward points and button states load
+        setRewardPoints(getRewardPoints());
+        setButtonState('completeBtn1', getButtonState('completeBtn1'));
+        setButtonState('completeBtn2', getButtonState('completeBtn2'));
+
+        // Complete button functionality for Day 1-5
+        document.getElementById('completeBtn1').addEventListener('click', function() {
+            let currentPoints = getRewardPoints();
+            setRewardPoints(currentPoints + 10); // Adding 10 points for Day 1-5
+            setButtonState('completeBtn1', true); // Disable Day 1-5 button
+            setButtonState('completeBtn2', false); // Enable Day 6-10 button
+        });
+
+        // Complete button functionality for Day 6-10
+        document.getElementById('completeBtn2').addEventListener('click', function() {
+            let currentPoints = getRewardPoints();
+            setRewardPoints(currentPoints + 15); // Adding 15 points for Day 6-10
+            setButtonState('completeBtn2', true); // Disable Day 6-10 button
+            // Enable next button when more days are added
+        });
+// Complete button functionality for Day 11-15
+document.getElementById('completeBtn3').addEventListener('click', function() {
+    let currentPoints = getRewardPoints();
+    setRewardPoints(currentPoints + 20); // Adding 20 points for Day 11-15
+    document.getElementById('completeBtn3').disabled = true;
+    document.getElementById('completeBtn4').disabled = false; // Enable Day 16-20
+});
+
+// Complete button functionality for Day 16-20
+document.getElementById('completeBtn4').addEventListener('click', function() {
+    let currentPoints = getRewardPoints();
+    setRewardPoints(currentPoints + 25); // Adding 25 points for Day 16-20
+    document.getElementById('completeBtn4').disabled = true;
+    document.getElementById('completeBtn5').disabled = false; // Enable Day 21-25
+});
+
+// Complete button functionality for Day 21-25
+document.getElementById('completeBtn5').addEventListener('click', function() {
+    let currentPoints = getRewardPoints();
+    setRewardPoints(currentPoints + 30); // Adding 30 points for Day 21-25
+    document.getElementById('completeBtn5').disabled = true;
+    document.getElementById('completeBtn6').disabled = false; // Enable Day 26-30
+});
+
+// Complete button functionality for Day 26-30
+document.getElementById('completeBtn6').addEventListener('click', function() {
+    let currentPoints = getRewardPoints();
+    setRewardPoints(currentPoints + 35); // Adding 35 points for Day 26-30
+    document.getElementById('completeBtn6').disabled = true;
+});
+
+        // Load similar logic for other days as needed...
+    </script>
+
+</body>
+</html>
