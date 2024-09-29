@@ -8,11 +8,11 @@ app.secret_key = 'your_secret_key'
 
 # Database connection setup
 db = mysql.connector.connect(
-    host=os.getenv('DB_HOST', 'localhost'),  # Use environment variable for host
-    user=os.getenv('DB_USER', 'root'),  # Database username
-    password=os.getenv('DB_PASSWORD', '25315'),  # Database password
-    database=os.getenv('DB_NAME', 'hari'),  # Database name
-    port=os.getenv('DB_PORT', '3306')  # Database port
+    host=os.getenv('DB_HOST', 'dpg-crsltu5ds78s73e6llr0-a'),  # Render MySQL host
+    user=os.getenv('DB_USER', 'sportsehat_user'),      # Render MySQL user
+    password=os.getenv('DB_PASSWORD', 'SVOU1SlZLZPOLrIywm6KvhzDxuZufB9o'),   # Render MySQL password
+    database=os.getenv('DB_NAME', 'sportsehat'),  # Render database name
+    port=os.getenv('DB_PORT', '5432')                    # Default port is 3306
 )
 @app.route('/')
 def index():
