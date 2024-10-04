@@ -3,20 +3,22 @@ import mysql.connector
 import otp
 from flask_mail import Mail, Message
 import os
+
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
 
 # Database connection setup
 db = mysql.connector.connect(
-    host=os.getenv('DB_HOST', 'dpg-crsltu5ds78s73e6llr0-a'),  # Render MySQL host
-    user=os.getenv('DB_USER', 'sportsehat_user'),      # Render MySQL user
-    password=os.getenv('DB_PASSWORD', 'SVOU1SlZLZPOLrIywm6KvhzDxuZufB9o'),   # Render MySQL password
-    database=os.getenv('DB_NAME', 'sportsehat'),  # Render database name
-    port=os.getenv('DB_PORT', '5432')                    # Default port is 3306
+    host=os.environ.get('dpg-crvurlrtq21c738r9a40-a'),
+    user=os.environ.get('teddyxpuppy_user'),
+    password=os.environ.get('HMYePjNG45CT5IyBDoxlohKFestXDGgW'),
+    database=os.environ.get('teddyxpuppy')
 )
+
 @app.route('/')
 def index():
     return render_template('index.html')
+
 # Signup Route
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
@@ -100,6 +102,7 @@ def verify_otp():
     else:
         flash('Invalid OTP, please try again', 'danger')
         return redirect(url_for('otp_page', email=email))
+
 # Login Route
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -139,6 +142,7 @@ def login():
             return render_template('login.html')  # Render the same page with the error message
 
     return render_template('login.html')
+
 @app.route('/chat')
 def chat():
     return render_template('chat.html')
@@ -147,6 +151,7 @@ def chat():
 def logout():
     session.clear()
     return redirect(url_for('index'))
+
 # Navigation Bar User Info
 @app.route('/user_info')
 def user_info():
@@ -155,6 +160,11 @@ def user_info():
     else:
         flash("Please log in to view your information.", "danger")
         return redirect(url_for('login'))
+
+@app.route('/info_sport')
+def info_sport():
+    return render_template('info_sport.html')
+
 # Athlete Dashboard Route
 @app.route('/athlete')
 def athlete_dashboard():
@@ -163,7 +173,7 @@ def athlete_dashboard():
     else:
         flash("Unauthorized access!", "danger")
         return redirect(url_for('login'))
-        
+
 @app.route('/academy')
 def academy_dashboard():
     if 'user' in session and session['user']['role'] == 'academy':
@@ -188,37 +198,42 @@ def handle_redirection():
         elif option == 'sports':
             return redirect(url_for('sports_selection'))
     else:
-        
-        return redirect(url_for('login')),400
+        return redirect(url_for('login')), 400
+
 # Calorie Intake Page
 @app.route('/calorie')
 def calorie_intake():
     return render_template('calorie.html')
+
 @app.route('/streak')
 def streak():
     return render_template('streak.html')
+
 # Exercise Page
 @app.route('/exercise')
 def exercise_page():
     return render_template('exercise.html')
+
 # Sports Selection Page
 @app.route('/sports')
 def sports_selection():
     return render_template('spa.html')
+
 @app.route('/challenge')
 def challenge_page():
     return render_template('cha.html')  # Render cha.html when redirected
+
 @app.route('/stress')
 def stress_buster():
     return render_template('str.html')
+
 @app.route('/search_sport', methods=['POST'])
 def search_sport():
-    
     sport = request.form.get('sport')
     
-    
     cursor = db.cursor(dictionary=True)
-# Query to find coaches with the selected sport as their specialization
+    
+    # Query to find coaches with the selected sport as their specialization
     cursor.execute("""
         SELECT a.name AS academy_name, a.address, a.phone AS academy_phone, a.email AS academy_email,
                c.name AS coach_name, c.specialization, c.phone AS coach_phone, c.email AS coach_email, c.achievements, c.certifications
@@ -240,9 +255,8 @@ def search_sport():
 @app.route('/sport_results')
 def sport_results():
     return render_template('sport_results.html')
-# Add this route to your existing code
-# Add this route to your existing code
 
+# Add this route to your existing code
 @app.route('/select_academy', methods=['POST'])
 def select_academy():
     academy_id = request.form.get('academy_id')
@@ -269,8 +283,6 @@ def sport_page():
 
     # Pass both the selected academy and user details to the template
     return render_template('sport.html', academy=selected_academy, user=user)
-
-
 
 @app.route('/submit_academy', methods=['POST'])
 def submit_academy():
@@ -312,4 +324,4 @@ def submit_page():
     return render_template('submit.html')
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
+    app.run(debug=True)
