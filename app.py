@@ -9,10 +9,11 @@ app.secret_key = 'your_secret_key'
 
 # Database connection setup
 db = mysql.connector.connect(
-    host=os.environ.get('dpg-crvurlrtq21c738r9a40-a'),
-    user=os.environ.get('teddyxpuppy_user'),
-    password=os.environ.get('HMYePjNG45CT5IyBDoxlohKFestXDGgW'),
-    database=os.environ.get('teddyxpuppy')
+    host=os.getenv("DB_HOST", "dpg-crvurlrtq21c738r9a40-a"),
+    user=os.getenv("DB_USER", "teddyxpuppy_user"),
+    password=os.getenv("DB_PASS", "HMYePjNG45CT5IyBDoxlohKFestXDGgW"),
+    database=os.getenv("DB_NAME", "teddyxpuppy"),
+    port=os.getenv("DB_PORT", 5432)  # Ensure correct port for MySQL
 )
 
 @app.route('/')
