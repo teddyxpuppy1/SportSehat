@@ -325,4 +325,7 @@ def submit_page():
     return render_template('submit.html')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    # Get the port from the environment or default to 5000
+    port = int(os.getenv('PORT', 5000))
+    # Bind the application to the assigned port
+    app.run(host='0.0.0.0', port=port)
